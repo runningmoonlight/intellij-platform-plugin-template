@@ -29,6 +29,7 @@ repositories {
 }
 dependencies {
     detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:1.17.0")
+    compileOnly(files("lib/wizard-template.jar"))
 }
 
 // Configure gradle-intellij-plugin plugin.

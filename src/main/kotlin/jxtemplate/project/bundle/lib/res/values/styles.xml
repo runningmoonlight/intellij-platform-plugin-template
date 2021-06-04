@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- TODO: There are two ways for customizing a style. -->
+    <!-- TODO: 1. Set all values needed one by one. -->
+    <style name="lib_demo_layout">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <!-- TODO: 2. Inherit a style from a system one. -->
+    <style name="lib_demo_app_theme" parent="@android:style/Theme.Light.NoTitleBar">
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+
+    <!--
+        TODO: Wrong !!!
+        TODO: A customized style is NOT supported because resources would be lost.
+    -->
+    <style name="lib_demo_layout_2" parent="@style/lib_demo_layout">
+        <item name="android:gravity">center</item>
+    </style>
+
+</resources>

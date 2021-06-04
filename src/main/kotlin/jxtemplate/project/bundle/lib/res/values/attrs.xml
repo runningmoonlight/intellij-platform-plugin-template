@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="Customized">
+
+        <!-- TODO: Supported. -->
+        <attr name="demo_size" format="dimension" />
+        <attr name="demo_scale" format="float" />
+        <attr name="demo_enabled" format="boolean" />
+        <attr name="demo_background" format="reference" />
+
+    </declare-styleable>
+
+</resources>
