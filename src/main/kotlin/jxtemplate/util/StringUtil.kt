@@ -25,7 +25,7 @@ object StringUtil {
 
     private val linePattern = Pattern.compile("_(\\w)")
     /**
-     * 下划线转驼峰
+     * 下划线转驼峰，并且首字符大写
      */
     fun  lineToHump(str: String): String {
         val lowerStr = str.toLowerCase()

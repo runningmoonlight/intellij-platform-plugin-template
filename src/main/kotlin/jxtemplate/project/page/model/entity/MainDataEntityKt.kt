@@ -18,5 +18,5 @@ package ${applicationPackage}.${StringUtil.removeLine(page)}.model.entity
  * 页面接口返回的实体类
  */
 //TODO 根据业务修改补充
-data class ${StringUtil.lineToHump(page).capitalize()}DataEntity(var code: Int?, var msg: String?, var list: List<String>?)
+data class ${StringUtil.lineToHump(page)}DataEntity(var code: Int?, var msg: String?, var list: List<String>?)
 """.trimIndent()

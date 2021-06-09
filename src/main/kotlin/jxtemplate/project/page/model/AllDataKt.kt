@@ -13,7 +13,7 @@ fun AllDataKt(
 ) = """
 package ${applicationPackage}.${StringUtil.removeLine(page)}.model
 
-import ${applicationPackage}.${StringUtil.removeLine(page)}.model.entity.${StringUtil.lineToHump(page).capitalize()}DataEntity
+import ${applicationPackage}.${StringUtil.removeLine(page)}.model.entity.${StringUtil.lineToHump(page)}DataEntity
 import ${applicationPackage}.${StringUtil.removeLine(page)}.ui.floor.TextModel
 import ${applicationPackage}.${StringUtil.removeLine(page)}.ui.floor.TextViewModel
 import com.jd.pingou.lib.adapter.core.ViewModelType
@@ -32,7 +32,7 @@ class AllData {
      * @param entity 接口实体数据
      * 解析接口数据
      */
-    fun parseData(entity: ${StringUtil.lineToHump(page).capitalize()}DataEntity) {
+    fun parseData(entity: ${StringUtil.lineToHump(page)}DataEntity) {
         entity.list?.let {
             for (text in it)
                 mFloorList.add(TextViewModel().apply {

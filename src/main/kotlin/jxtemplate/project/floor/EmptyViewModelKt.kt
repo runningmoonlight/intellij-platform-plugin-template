@@ -6,12 +6,12 @@ package jxtemplate.project.floor
  */
 
 fun EmptyViewModelKt(
-        bundle: String,
+        applicationPackage: String?,
         page: String
 ) = """
-package com.jd.pingou.${bundle}.${page}.ui.floor
+package ${applicationPackage}.${page}.ui.floor
 
-import com.jd.pingou.${bundle}.R
+import ${applicationPackage}.R
 import com.jd.pingou.lib.adapter.core.*
 
 /**

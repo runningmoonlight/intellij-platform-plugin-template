@@ -31,6 +31,11 @@ val bundleTemplate
             help = "输入插件工程名称小写，建议以jx开头"
             constraints = listOf(Constraint.NONEMPTY)
         }
+        val pingouLibVersion = stringParameter {
+            name = "pingou-lib版本"
+            default = "4.10.0"
+            constraints = listOf(Constraint.NONEMPTY)
+        }
         val buildMainPage = booleanParameter {
             name = "是否创建默认主页面，为true后三个属性才有效"
             default = true
@@ -54,6 +59,7 @@ val bundleTemplate
         widgets(
                 TextFieldWidget(bundlePath),
                 TextFieldWidget(bundleName),
+                TextFieldWidget(pingouLibVersion),
                 CheckBoxWidget(buildMainPage),
                 CheckBoxWidget(enableFragment),
                 CheckBoxWidget(enablePullToRefresh),
@@ -66,6 +72,7 @@ val bundleTemplate
                     bundlePath.value,
                     bundleName.value,
                     buildMainPage.value,
+                    pingouLibVersion.value,
                     enableFragment.value,
                     enablePullToRefresh.value,
                     enableRecommendWidget.value

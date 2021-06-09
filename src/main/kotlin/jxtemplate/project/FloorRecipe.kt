@@ -32,7 +32,7 @@ fun RecipeExecutor.floorRecipe(
         save(StringEntityKt(applicationPackage, packageName, page, floor, floorCap, buildEntity), srcOut.resolve("${StringUtil.removeLine(floor)}/${floorCap.capitalize()}Entity${Constants.kotlinExt}"))
         save(floor_holder_text_Xml(), resOut.resolve("layout/floor_holder_${floor}.xml"))
     } else {
-        save(floorViewModel, srcOut.resolve("${floorCap.capitalize()}ViewModel${Constants.kotlinExt}"))
+        save(floorViewModel, srcOut.resolve("${floorCap}ViewModel${Constants.kotlinExt}"))
         save(floor_holder_text_Xml(), resOut.resolve("layout/floor_holder_${floor}${Constants.xmlExt}"))
     }
 

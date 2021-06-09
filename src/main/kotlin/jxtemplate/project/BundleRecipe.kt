@@ -37,6 +37,7 @@ fun RecipeExecutor.bundleRecipe(
         bundlePath: String,
         bundleName: String,
         buildMainPage: Boolean,
+        pingouLibVersion: String,
         enableFragment: Boolean,
         enablePullToRefresh: Boolean,
         enableRecommendWidget: Boolean
@@ -50,7 +51,7 @@ fun RecipeExecutor.bundleRecipe(
     val bundleOut = rootFile.resolve("bundle-${bundleName}")
     save(bundle_build_gradle(), bundleOut.resolve("build.gradle"))
     save(bundle_gitignore(), bundleOut.resolve(".gitignore"))
-    save(gradle_propertiesKt("4.10.0"), bundleOut.resolve("gradle.properties"))
+    save(gradle_propertiesKt(pingouLibVersion), bundleOut.resolve("gradle.properties"))
     save(setting_gradleKt(bundleName), bundleOut.resolve("settings.gradle"))
 
     //application
@@ -86,9 +87,6 @@ fun RecipeExecutor.bundleRecipe(
     //layout
     val libResLayoutOut = libResOut.resolve("layout")
     libResLayoutOut.mkdirs()
-    ResourceHelper.copyResourceFile("/layout/floor_holder_text.xml", libResLayoutOut.resolve("floor_holder_text.xml"))
-    ResourceHelper.copyResourceFile("/layout/view_recommend_header.xml", libResLayoutOut.resolve("view_recommend_header.xml"))
-    ResourceHelper.copyResourceFile("/layout/view_state_empty.xml", libResLayoutOut.resolve("view_state_empty.xml"))
     ResourceHelper.copyResourceFile("/layout/view_state_error.xml", libResLayoutOut.resolve("view_state_error.xml"))
     //values
     val libResValuesOut = libResOut.resolve("values")

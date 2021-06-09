@@ -35,7 +35,7 @@ package $packageName
 
 import android.widget.TextView
 import ${applicationPackage}.R
-import ${applicationPackage}.${page}.ui.${page.capitalize()}Adapter
+import ${applicationPackage}.${page}.ui.${StringUtil.lineToHump(page)}Adapter
 import com.jd.pingou.lib.adapter.core.*
 
 /**
@@ -57,7 +57,7 @@ class ${floorCap}ViewModel: LayoutViewModel<${floorCap}Model>(R.layout.floor_hol
             onBindViewHolder {
                 val model = getModel<${floorCap}Model>()  //拿到DataModel
                 val data = model?.text  //拿到data
-                val adapter = getAdapter<${page.capitalize()}Adapter>() //拿到adapter
+                val adapter = getAdapter<${StringUtil.lineToHump(page)}Adapter>() //拿到adapter
                 val recyclerView = getRecyclerView()
                 textView.text = model?.text
             }

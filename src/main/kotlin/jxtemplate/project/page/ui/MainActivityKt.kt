@@ -38,7 +38,7 @@ import ${applicationPackage}.common.ErrorViewModel
 import ${applicationPackage}.common.OnRetryListener
 import ${applicationPackage}.common.PostedEvent
 import ${applicationPackage}.common.PullToRefreshView
-import ${applicationPackage}.${StringUtil.removeLine(page)}.vm.${StringUtil.lineToHump(page).capitalize()}ViewModel
+import ${applicationPackage}.${StringUtil.removeLine(page)}.vm.${StringUtil.lineToHump(page)}ViewModel
 import com.jd.pingou.lib.adapter.WrapperAdapter
 import com.jd.pingou.lib.adapter.core.ViewModelType
 import com.jd.pingou.lib.adapter.core.into
@@ -56,7 +56,7 @@ import java.util.ArrayList
 
 //TODO 修改deeplink
 @DeepLink("jdpingou://${StringUtil.getBundleStr(applicationPackage)}_${StringUtil.removeLine(page)}")
-class ${StringUtil.lineToHump(page).capitalize()}Activity : BaseActivity(), IRecommend {
+class ${StringUtil.lineToHump(page)}Activity : BaseActivity(), IRecommend {
 
     private lateinit var mBackIv: ImageView
     private lateinit var mTitleTv: TextView
@@ -69,27 +69,27 @@ class ${StringUtil.lineToHump(page).capitalize()}Activity : BaseActivity(), IRec
     private lateinit var mRecommendFooterView: RecommendFooterView
     private lateinit var mRecommendWidget: RecommendWidget
 
-    private lateinit var m${StringUtil.lineToHump(page).capitalize()}ViewModel: ${StringUtil.lineToHump(page).capitalize()}ViewModel
+    private lateinit var m${StringUtil.lineToHump(page)}ViewModel: ${StringUtil.lineToHump(page)}ViewModel
 
     private var mRecommendParams: String = ""
     private var mRecyclerViewDy: Int = 0 //滚动dy
     private val mTopDistance = JxScreenUtils.getScreenHeightWithVirtKeyboard(JxApplication.getApplicationContext()) //滚动两个屏幕的距离，返回顶部按钮可见
-    private val m${StringUtil.lineToHump(page).capitalize()}ReportId = JxApplication.getApplication().resources.getString(R.string.${page}_reportPageId)
+    private val m${StringUtil.lineToHump(page)}ReportId = JxApplication.getApplication().resources.getString(R.string.${page}_reportPageId)
 
     companion object {
         const val VIEW_TYPE_RECOMMEND_HEADER = 310
         const val VIEW_TYPE_RECOMMEND_FOOTER = 320
         const val VIEW_TYPE_RECOMMEND_WIDGET = 330
 
-        private var TAG = ${StringUtil.lineToHump(page).capitalize()}Activity::class.java.simpleName
+        private var TAG = ${StringUtil.lineToHump(page)}Activity::class.java.simpleName
     }
 
-    private val m${StringUtil.lineToHump(page).capitalize()}Adapter  by lazy {
-        ${StringUtil.lineToHump(page).capitalize()}Adapter()
+    private val m${StringUtil.lineToHump(page)}Adapter  by lazy {
+        ${StringUtil.lineToHump(page)}Adapter()
     }
 
     private val mWrapperAdapter by lazy {
-        WrapperAdapter(m${StringUtil.lineToHump(page).capitalize()}Adapter)
+        WrapperAdapter(m${StringUtil.lineToHump(page)}Adapter)
     }
 
     val mRecycleViewScrollListener: RecyclerView.OnScrollListener = object : RecyclerView.OnScrollListener() {
@@ -122,7 +122,7 @@ class ${StringUtil.lineToHump(page).capitalize()}Activity : BaseActivity(), IRec
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        JxReportUtils.initWatcher(m${StringUtil.lineToHump(page).capitalize()}ReportId, 3)
+        JxReportUtils.initWatcher(m${StringUtil.lineToHump(page)}ReportId, 3)
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_${page})
@@ -131,7 +131,7 @@ class ${StringUtil.lineToHump(page).capitalize()}Activity : BaseActivity(), IRec
         initViewModel()
 
         immersive(true)
-        JxReportUtils.athenaReport(m$${StringUtil.lineToHump(page).capitalize()}ReportId, 0)
+        JxReportUtils.athenaReport(m$${StringUtil.lineToHump(page)}ReportId, 0)
     }
 
     private fun initView() {
@@ -147,7 +147,7 @@ class ${StringUtil.lineToHump(page).capitalize()}Activity : BaseActivity(), IRec
         mPullToRefreshView = findViewById(R.id.view_pull_to_refresh)
         mWrapperAdapter.into(mPullToRefreshView.refreshableView)
         mPullToRefreshView.setOnRefreshListener {
-            m${StringUtil.lineToHump(page).capitalize()}ViewModel.sync${StringUtil.lineToHump(page).capitalize()}Data("", false) //TODO
+            m${StringUtil.lineToHump(page)}ViewModel.sync${StringUtil.lineToHump(page)}Data("", false) //TODO
         }
         mPullToRefreshView.refreshableView.addOnScrollListener(mRecycleViewScrollListener)
         //推荐组件footer
@@ -209,23 +209,23 @@ class ${StringUtil.lineToHump(page).capitalize()}Activity : BaseActivity(), IRec
     }
 
     private fun initViewModel() {
-        m${StringUtil.lineToHump(page).capitalize()}ViewModel = ViewModelProviders.of(this).get(${StringUtil.lineToHump(page).capitalize()}ViewModel::class.java)
-        m${StringUtil.lineToHump(page).capitalize()}ViewModel.dataMutableLiveData.observe(this, Observer {
+        m${StringUtil.lineToHump(page)}ViewModel = ViewModelProviders.of(this).get(${StringUtil.lineToHump(page)}ViewModel::class.java)
+        m${StringUtil.lineToHump(page)}ViewModel.dataMutableLiveData.observe(this, Observer {
             mPullToRefreshView.onRefreshComplete()
-            m${StringUtil.lineToHump(page).capitalize()}Adapter.setData(it)
+            m${StringUtil.lineToHump(page)}Adapter.setData(it)
             loadRecommend()
         })
-        m${StringUtil.lineToHump(page).capitalize()}ViewModel.loadingEventLiveData.observe(this, Observer {
+        m${StringUtil.lineToHump(page)}ViewModel.loadingEventLiveData.observe(this, Observer {
             onEvent(it)
         })
-        m${StringUtil.lineToHump(page).capitalize()}ViewModel.stateEventLiveData.observe(this, Observer {
+        m${StringUtil.lineToHump(page)}ViewModel.stateEventLiveData.observe(this, Observer {
             mPullToRefreshView.onRefreshComplete()
             onEvent(it)
         })
 
-        JxReportUtils.athenaReport(m${StringUtil.lineToHump(page).capitalize()}ReportId, 2)
+        JxReportUtils.athenaReport(m${StringUtil.lineToHump(page)}ReportId, 2)
         //TODO 补充接口参数
-        m${StringUtil.lineToHump(page).capitalize()}ViewModel.sync${StringUtil.lineToHump(page).capitalize()}Data("", true)
+        m${StringUtil.lineToHump(page)}ViewModel.sync${StringUtil.lineToHump(page)}Data("", true)
     }
 
     override fun immersive(immersiveWhite: Boolean) {
@@ -245,7 +245,7 @@ class ${StringUtil.lineToHump(page).capitalize()}Activity : BaseActivity(), IRec
     }
 
     private fun loadRecommend() {
-        val params: String = m${StringUtil.lineToHump(page).capitalize()}Adapter.mAllData?.mRecommendParams ?: ""
+        val params: String = m${StringUtil.lineToHump(page)}Adapter.mAllData?.mRecommendParams ?: ""
 
         //参数不变，显示原有推荐数据
         if (TextUtils.equals(mRecommendParams, params) && mRecommendWidget.hasRecommendData()) {
@@ -274,7 +274,7 @@ class ${StringUtil.lineToHump(page).capitalize()}Activity : BaseActivity(), IRec
     ///清除推荐组件
     private fun clearRecommend() {
         mRecommendWidget.clearRecommend()
-        m${StringUtil.lineToHump(page).capitalize()}Adapter.notifyDataSetChanged()
+        m${StringUtil.lineToHump(page)}Adapter.notifyDataSetChanged()
     }
 
     private fun onEvent(event: PostedEvent) {
@@ -298,10 +298,10 @@ class ${StringUtil.lineToHump(page).capitalize()}Activity : BaseActivity(), IRec
         list.add(ErrorViewModel(object : OnRetryListener {
             override fun onRetryClick() {
                 //TODO
-                m${StringUtil.lineToHump(page).capitalize()}ViewModel.sync${StringUtil.lineToHump(page).capitalize()}Data("", true)
+                m${StringUtil.lineToHump(page)}ViewModel.sync${StringUtil.lineToHump(page)}Data("", true)
             }
         }))
-        m${StringUtil.lineToHump(page).capitalize()}Adapter.setStateData(list)
+        m${StringUtil.lineToHump(page)}Adapter.setStateData(list)
     }
 }
 """.trimIndent()

@@ -21,7 +21,7 @@ import com.jd.pingou.lib.adapter.core.ViewModelType
 /**
  * Created by liuheng on 2021/6/1.
  */
-class ${StringUtil.lineToHump(page).capitalize()}Adapter: BaseAdapter<ViewModelType>() {
+class ${StringUtil.lineToHump(page)}Adapter: BaseAdapter<ViewModelType>() {
 
     var mAllData: AllData? = null
     private var mFloorList = mutableListOf<ViewModelType>()
