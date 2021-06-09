@@ -46,4 +46,12 @@ object StringUtil {
         return lowerStr.replace("_", "")
     }
 
+    fun getBundleStr(applicationPackage: String?): String {
+        if (applicationPackage == null || applicationPackage.isEmpty()) {
+            return "bundle"
+        }
+        val packageArray = applicationPackage.split(".")
+        return packageArray.last()
+    }
+
 }

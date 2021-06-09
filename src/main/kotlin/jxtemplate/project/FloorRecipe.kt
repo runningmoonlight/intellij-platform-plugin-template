@@ -8,7 +8,6 @@ import jxtemplate.project.floor.floor_holder_text_Xml
 import jxtemplate.project.floor.string.StringEntityKt
 import jxtemplate.util.Constants
 import jxtemplate.util.StringUtil
-import java.io.File
 
 /**
  * Created by liuheng on 2021/6/4.
@@ -16,14 +15,14 @@ import java.io.File
  */
 
 fun RecipeExecutor.floorRecipe(
-        floorData: ModuleTemplateData,
+        moduleTemplateData: ModuleTemplateData,
         floor: String,
         buildEntity: Boolean
 ) {
-    val (projectData, srcOut, resOut) = floorData
+    val (projectData, srcOut, resOut) = moduleTemplateData
 //    val ktOrJavaExt = projectData.language.extension
     val applicationPackage = projectData.applicationPackage
-    val packageName = floorData.packageName
+    val packageName = moduleTemplateData.packageName
     val page = StringUtil.getPageStr(applicationPackage, packageName)
     val floorCap = StringUtil.lineToHump(floor)
 
@@ -32,7 +31,6 @@ fun RecipeExecutor.floorRecipe(
         save(floorViewModel, srcOut.resolve("${StringUtil.removeLine(floor)}/${floorCap}ViewModel${Constants.kotlinExt}"))
         save(StringEntityKt(applicationPackage, packageName, page, floor, floorCap, buildEntity), srcOut.resolve("${StringUtil.removeLine(floor)}/${floorCap.capitalize()}Entity${Constants.kotlinExt}"))
         save(floor_holder_text_Xml(), resOut.resolve("layout/floor_holder_${floor}.xml"))
-        save(floorData.toString(), srcOut.resolve("${StringUtil.removeLine(floor)}/moduleTemplateData${Constants.kotlinExt}")) //TODO 删除
     } else {
         save(floorViewModel, srcOut.resolve("${floorCap.capitalize()}ViewModel${Constants.kotlinExt}"))
         save(floor_holder_text_Xml(), resOut.resolve("layout/floor_holder_${floor}${Constants.xmlExt}"))

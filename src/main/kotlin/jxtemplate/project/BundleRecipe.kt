@@ -33,10 +33,11 @@ import java.io.File
  */
 
 fun RecipeExecutor.bundleRecipe(
-        bundleData: ModuleTemplateData,
+        moduleTemplateData: ModuleTemplateData,
         bundlePath: String,
         bundleName: String,
         buildMainPage: Boolean,
+        enableFragment: Boolean,
         enablePullToRefresh: Boolean,
         enableRecommendWidget: Boolean
 ) {

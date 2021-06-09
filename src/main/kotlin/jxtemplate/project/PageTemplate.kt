@@ -2,39 +2,28 @@ package jxtemplate.project
 
 import com.android.tools.idea.wizard.template.*
 import jxtemplate.util.Constants
+import org.jetbrains.kotlin.idea.refactoring.pullUp.EmptyPullUpHelper
 
 /**
- * Created by liuheng on 2021/6/4.
- * 插件工程模板配置
+ * Created by liuheng on 2021/6/9.
+ * MVVM页面模板配置
  */
-
-val bundleTemplate
+val pageTemplate
     get() = template {
         revision = 1
-        name = "插件工程模板"
-        description = "创建京喜androidx模板的插件工程"
-        minApi = Constants.MIN_API
+        name = "页面模板"
+        description = "创建MVVM架构的页面"
         minBuildApi = Constants.MIN_API
+        minApi = Constants.MIN_API
         category = Category.Other
         formFactor = FormFactor.Mobile
         screens = listOf(WizardUiContext.ActivityGallery, WizardUiContext.MenuEntry, WizardUiContext.NewProject, WizardUiContext.NewModule)
 
-        val bundlePath = stringParameter {
-            name = "插件工程所在路径"
+        val page = stringParameter {
+            name = "页面名称"
             default = ""
-            help = "输入完整路径，如D:\\template\\project\\"
+            help = "输入页面单词小写，多个单词用_隔开"
             constraints = listOf(Constraint.NONEMPTY)
-        }
-        val bundleName = stringParameter {
-            name = "插件工程名称name（最终格式：bundle-{name}"
-            default = ""
-            help = "输入插件工程名称小写，建议以jx开头"
-            constraints = listOf(Constraint.NONEMPTY)
-        }
-        val buildMainPage = booleanParameter {
-            name = "是否创建默认主页面，为true后三个属性才有效"
-            default = true
-            help = "创建默认的页面模板（main）"
         }
         val enableFragment = booleanParameter {
             name = "是否使用activity嵌套fragment"
@@ -52,28 +41,22 @@ val bundleTemplate
         }
 
         widgets(
-                TextFieldWidget(bundlePath),
-                TextFieldWidget(bundleName),
-                CheckBoxWidget(buildMainPage),
+                TextFieldWidget(page),
                 CheckBoxWidget(enableFragment),
                 CheckBoxWidget(enablePullToRefresh),
                 CheckBoxWidget(enableRecommendWidget)
         )
 
         recipe = {data: TemplateData ->
-            bundleRecipe(
+            pageRecipe(
                     data as ModuleTemplateData,
-                    bundlePath.value,
-                    bundleName.value,
-                    buildMainPage.value,
+                    page.value,
                     enableFragment.value,
                     enablePullToRefresh.value,
                     enableRecommendWidget.value
             )
+
         }
-
-
-
 
 
     }

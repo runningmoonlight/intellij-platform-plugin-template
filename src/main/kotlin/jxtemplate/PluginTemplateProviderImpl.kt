@@ -4,6 +4,7 @@ import com.android.tools.idea.wizard.template.Template
 import com.android.tools.idea.wizard.template.WizardTemplateProvider
 import jxtemplate.project.bundleTemplate
 import jxtemplate.project.floorTemplate
+import jxtemplate.project.pageTemplate
 
 /**
  * Created by liuheng on 2021/6/3.
@@ -11,6 +12,7 @@ import jxtemplate.project.floorTemplate
 class PluginTemplateProviderImpl: WizardTemplateProvider() {
     override fun getTemplates(): List<Template> = listOf(
             floorTemplate,
-            bundleTemplate
+            bundleTemplate,
+            pageTemplate
     )
 }

@@ -6,7 +6,7 @@ package jxtemplate.project.page.ui
  */
 
 fun activity_page_Xml(
-        bundle: String,
+        applicationPackage: String?,
         page: String
 ) = """
 <?xml version="1.0" encoding="utf-8"?>
@@ -64,7 +64,7 @@ fun activity_page_Xml(
                 android:layout_marginEnd="4dp"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <com.jd.pingou.${bundle}.common.PullToRefreshView
+        <${applicationPackage}.common.PullToRefreshView
             android:id="@+id/view_pull_to_refresh"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

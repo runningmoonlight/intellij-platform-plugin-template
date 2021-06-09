@@ -1,15 +1,17 @@
 package jxtemplate.project.page.model
 
+import jxtemplate.util.StringUtil
+
 /**
  * Created by liuheng on 2021/6/3.
  * RequestParam
  */
 
 fun RequestParamKt(
-        bundle: String,
+        applicationPackage: String?,
         page: String
 ) = """
-package com.jd.pingou.${bundle}.${page}.model
+package ${applicationPackage}.${StringUtil.removeLine(page)}.model
 
 /**
  * Created by liuheng on 2021/6/1.

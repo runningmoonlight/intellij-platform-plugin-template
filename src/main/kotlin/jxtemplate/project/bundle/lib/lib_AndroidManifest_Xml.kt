@@ -1,5 +1,7 @@
 package jxtemplate.project.bundle.lib
 
+import jxtemplate.util.StringUtil
+
 /**
  * Created by liuheng on 2021/6/3.
  * AndroidManifest.xml
@@ -20,20 +22,20 @@ fun lib_AndroidManifest_Xml(
 
     <application
         android:name=".DemoApplication"
-        android:label="@string/${bundle}"_app_name"
+        android:label="@string/${bundle}_app_name"
         android:theme="@android:style/Theme.Holo.Light.NoActionBar">
 
 
-""".trimIndent()
+"""
     )
 
-    if (page.isNotEmpty()) {
-        stringBuilder.append(
-                """
-
-        <activity android:name=".${page}.ui.${page.capitalize()}Activity"></activity>
-""".trimIndent())
-    }
+//    if (page.isNotEmpty()) {
+//        stringBuilder.append(
+//                """
+//
+//        <activity android:name=".${StringUtil.lineToHump(page).capitalize()}Activity"></activity>
+//""".trimIndent())
+//    }
 
     stringBuilder.append(
 """
@@ -56,7 +58,7 @@ fun lib_AndroidManifest_Xml(
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
 </manifest>                
-""".trimIndent()
+"""
     )
 
     return stringBuilder.toString()

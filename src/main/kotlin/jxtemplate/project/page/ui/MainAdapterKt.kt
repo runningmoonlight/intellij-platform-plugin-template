@@ -1,17 +1,19 @@
 package jxtemplate.project.page.ui
 
+import jxtemplate.util.StringUtil
+
 /**
  * Created by liuheng on 2021/6/3.
  * MainAdapter
  */
 
 fun MainAdapterKt(
-        bundle: String,
+        applicationPackage: String?,
         page: String
 ) = """
-package com.jd.pingou.${bundle}.${page}.ui
+package ${applicationPackage}.${StringUtil.removeLine(page)}.ui
 
-import com.jd.pingou.${bundle}.${page}.model.AllData
+import ${applicationPackage}.${StringUtil.removeLine(page)}.model.AllData
 import com.jd.pingou.lib.adapter.core.BaseAdapter
 import com.jd.pingou.lib.adapter.core.ViewModelType
 
@@ -19,7 +21,7 @@ import com.jd.pingou.lib.adapter.core.ViewModelType
 /**
  * Created by liuheng on 2021/6/1.
  */
-class ${page.capitalize()}Adapter: BaseAdapter<ViewModelType>() {
+class ${StringUtil.lineToHump(page).capitalize()}Adapter: BaseAdapter<ViewModelType>() {
 
     var mAllData: AllData? = null
     private var mFloorList = mutableListOf<ViewModelType>()
