@@ -1,4 +1,10 @@
 package jxtemplate.project.bundle
+
+/**
+ * Created by liuheng on 2021/6/8.
+ */
+fun bundle_build_gradle()
+= """
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
@@ -18,9 +24,9 @@ buildscript {
 
     dependencies {
         classpath 'com.android.tools.build:gradle:3.3.0'
-        classpath "com.jingdong.wireless.aurasdk:auraplugin:$aura_plugin_version"
+        classpath "com.jingdong.wireless.aurasdk:auraplugin:${'$'}aura_plugin_version"
         // Kotlin编译插件
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${'$'}kotlinVersion"
     }
 }
 allprojects {
@@ -38,3 +44,5 @@ allprojects {
         mavenCentral()
     }
 }
+
+""".trimIndent()

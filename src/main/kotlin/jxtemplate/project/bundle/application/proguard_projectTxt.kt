@@ -1,9 +1,17 @@
+package jxtemplate.project.bundle.application
+
+/**
+ * Created by liuheng on 2021/6/8.
+ */
+fun proguard_projectTxt(
+
+) = """
 # To enable ProGuard in your project, edit project.properties
 # to define the proguard.config property as described in that file.
 #
 # Add project specific ProGuard rules here.
 # By default, the flags in this file are appended to flags specified
-# in ${sdk.dir}/tools/proguard/proguard-android.txt
+# in ${'$'}{sdk.dir}/tools/proguard/proguard-android.txt
 # You can edit the include path and order by changing the ProGuard
 # include property in project.properties.
 #
@@ -60,7 +68,7 @@ public static ** valueOf(java.lang.String);
 }
 
 -keep class * implements android.os.Parcelable {
-public static final android.os.Parcelable$Creator *;
+public static final android.os.Parcelable${'$'}Creator *;
 }
 
 -keepclasseswithmembers class android.app.Notification {*;}
@@ -82,7 +90,7 @@ public static final android.os.Parcelable$Creator *;
 #start ButterKnife
 -keep class butterknife.** { *; }
 -dontwarn butterknife.internal.**
--keep class **$$ViewBinder { *; }
+-keep class **${'$'}{'$'}${'$'}ViewBinder { *; }
 
 -keepclasseswithmembernames class * {
 @butterknife.* <fields>;
@@ -99,3 +107,4 @@ public static final android.os.Parcelable$Creator *;
 -keep interface androidx.** {*;}
 
 # TODO 增加插件混淆规则
+""".trimIndent()

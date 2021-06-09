@@ -5,7 +5,7 @@ package jxtemplate.project.bundle.application
  * build.gradle
  */
 
-fun build_gradleKt(
+fun application_build_gradleKt(
         bundle: String
 ) = """
 apply plugin: 'com.android.application'

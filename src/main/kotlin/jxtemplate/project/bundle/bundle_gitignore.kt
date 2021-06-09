@@ -1,3 +1,10 @@
+package jxtemplate.project.bundle
+
+/**
+ * Created by liuheng on 2021/6/8.
+ */
+fun bundle_gitignore()
+= """
 # Android generated
 bin/
 gen/
@@ -51,3 +58,4 @@ aura.json
 deeplink.json
 bundleinfo.json
 /captures/
+""".trimIndent()

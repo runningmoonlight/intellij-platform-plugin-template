@@ -1,15 +1,73 @@
 package jxtemplate.project
 
-import com.android.tools.idea.wizard.template.template
+import com.android.tools.idea.wizard.template.*
+import jxtemplate.util.Constants
 
 /**
  * Created by liuheng on 2021/6/4.
+ * 插件工程模板配置
  */
 
 val bundleTemplate
     get() = template {
         revision = 1
-        name = "插件工程"
-        description = "创建京喜androidx模板的插件"
+        name = "插件工程模板"
+        description = "创建京喜androidx模板的插件工程"
+        minApi = Constants.MIN_API
+        minBuildApi = Constants.MIN_API
+        category = Category.Other
+        formFactor = FormFactor.Mobile
+        screens = listOf(WizardUiContext.ActivityGallery, WizardUiContext.MenuEntry, WizardUiContext.NewProject, WizardUiContext.NewModule)
+
+        val bundlePath = stringParameter {
+            name = "插件工程所在路径"
+            default = ""
+            help = "输入完整路径，如D:\\template\\project\\"
+            constraints = listOf(Constraint.NONEMPTY)
+        }
+        val bundleName = stringParameter {
+            name = "插件工程名称name（最终格式：bundle-{name}"
+            default = ""
+            help = "输入插件工程名称小写，建议以jx开头"
+            constraints = listOf(Constraint.NONEMPTY)
+        }
+        val buildMainPage = booleanParameter {
+            name = "是否创建默认主页面"
+            default = true
+            help = "创建默认的页面模板（main）"
+        }
+        val enablePullToRefresh = booleanParameter {
+            name = "是否支持下拉刷新"
+            default = true
+            help = "true-支持， false-不支持"
+        }
+        val enableRecommendWidget = booleanParameter {
+            name = "是否支持推荐组件"
+            default = true
+            help = "true-支持， false-不支持"
+        }
+
+        widgets(
+                TextFieldWidget(bundlePath),
+                TextFieldWidget(bundleName),
+                CheckBoxWidget(buildMainPage),
+                CheckBoxWidget(enablePullToRefresh),
+                CheckBoxWidget(enableRecommendWidget)
+        )
+
+        recipe = {data: TemplateData ->
+            bundleRecipe(
+                    data as ModuleTemplateData,
+                    bundlePath.value,
+                    bundleName.value,
+                    buildMainPage.value,
+                    enablePullToRefresh.value,
+                    enableRecommendWidget.value
+            )
+        }
+
+
+
+
 
     }

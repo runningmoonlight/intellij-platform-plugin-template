@@ -1,4 +1,4 @@
-package jxtemplate.project.bundle.lib.res.layout
+package jxtemplate.project.page.ui
 
 /**
  * Created by liuheng on 2021/6/3.

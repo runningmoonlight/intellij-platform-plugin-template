@@ -1,5 +1,7 @@
 package jxtemplate.util
 
+import java.io.File
+
 /**
  * Created by liuheng on 2021/6/4.
  */
@@ -10,5 +12,9 @@ class Constants {
 
         const val xmlExt = ".xml"
         const val kotlinExt = ".kt"
+        const val javaExt = ".java"
     }
+
+
+
 }

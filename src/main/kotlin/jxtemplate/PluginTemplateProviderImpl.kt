@@ -2,6 +2,7 @@ package jxtemplate
 
 import com.android.tools.idea.wizard.template.Template
 import com.android.tools.idea.wizard.template.WizardTemplateProvider
+import jxtemplate.project.bundleTemplate
 import jxtemplate.project.floorTemplate
 
 /**
@@ -9,6 +10,7 @@ import jxtemplate.project.floorTemplate
  */
 class PluginTemplateProviderImpl: WizardTemplateProvider() {
     override fun getTemplates(): List<Template> = listOf(
-        floorTemplate
+            floorTemplate,
+            bundleTemplate
     )
 }

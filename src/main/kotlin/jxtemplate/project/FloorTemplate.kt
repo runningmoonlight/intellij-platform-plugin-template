@@ -5,14 +5,14 @@ import jxtemplate.util.Constants
 
 /**
  * Created by liuheng on 2021/6/4.
- * 楼层模板弹窗
+ * 楼层模板配置
  */
 
 val floorTemplate
     get() = template {
         revision = 1
         name = "楼层模板"
-        description = "创建对应的ViewModel和Entity类"
+        description = "创建楼层对应的ViewModel和Entity类"
         minApi = Constants.MIN_API
         minBuildApi = Constants.MIN_API
         category = Category.Other

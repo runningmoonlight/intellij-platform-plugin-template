@@ -6,14 +6,11 @@ package jxtemplate.project.bundle.lib.res.values
  */
 
 fun string_Xml(
-        bundle: String,
-        page: String
+        bundle: String
 ) = """
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="${bundle}_app_name">bundle-${bundle}</string>
-<!--    todo 根据页面修改-->
-    <string name="${page}_reportPageId">111111</string>
     <string name="item_recommend_title">可能你还想要</string>
 </resources>
 """.trimIndent()

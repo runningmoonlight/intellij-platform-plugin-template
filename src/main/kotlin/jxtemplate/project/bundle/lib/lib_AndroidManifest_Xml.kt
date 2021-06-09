@@ -5,10 +5,13 @@ package jxtemplate.project.bundle.lib
  * AndroidManifest.xml
  */
 
-fun AndroidManifest_Xml(
+fun lib_AndroidManifest_Xml(
         bundle: String,
         page: String
-) = """
+): String {
+    val stringBuilder = StringBuilder()
+    stringBuilder.append(
+"""
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.jd.pingou.${bundle}"
@@ -20,7 +23,20 @@ fun AndroidManifest_Xml(
         android:label="@string/${bundle}"_app_name"
         android:theme="@android:style/Theme.Holo.Light.NoActionBar">
 
+
+""".trimIndent()
+    )
+
+    if (page.isNotEmpty()) {
+        stringBuilder.append(
+                """
+
         <activity android:name=".${page}.ui.${page.capitalize()}Activity"></activity>
+""".trimIndent())
+    }
+
+    stringBuilder.append(
+"""
 
         <!-- TODO: Please copy declarations of all activities to the Manifest.xml in the main project. -->
         <activity
@@ -39,5 +55,10 @@ fun AndroidManifest_Xml(
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
-</manifest>
+</manifest>                
 """.trimIndent()
+    )
+
+    return stringBuilder.toString()
+}
+

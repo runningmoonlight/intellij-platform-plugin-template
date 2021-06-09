@@ -5,7 +5,7 @@ package jxtemplate.project.bundle.application
  * AndroidManifest.xml
  */
 
-fun AndroidManifest_Xml(
+fun application_AndroidManifest_Xml(
         bundle: String
 ) = """
 <?xml version="1.0" encoding="utf-8"?>

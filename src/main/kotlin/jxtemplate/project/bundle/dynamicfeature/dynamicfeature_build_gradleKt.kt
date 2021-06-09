@@ -5,7 +5,7 @@ package jxtemplate.project.bundle.dynamicfeature
  * build.gradle
  */
 
-fun build_gradleKt(
+fun dynamicfeature_build_gradleKt(
         bundle: String
 ) = """
 apply plugin: 'com.android.dynamic-feature'

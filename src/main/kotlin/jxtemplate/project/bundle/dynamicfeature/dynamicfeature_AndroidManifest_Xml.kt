@@ -5,7 +5,7 @@ package jxtemplate.project.bundle.dynamicfeature
  * AndroidManifest.xml
  */
 
-fun AndroidManifest_Xml(
+fun dynamicfeature_AndroidManifest_Xml(
         bundle: String
 ) = """
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
