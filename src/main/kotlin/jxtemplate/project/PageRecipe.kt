@@ -36,27 +36,27 @@ fun RecipeExecutor.pageRecipe(
     }
 
     pageRecipe(
-            moduleTemplateData,
             page,
             enableFragment,
             enablePullToRefresh,
             enableRecommendWidget,
             applicationPackage.toString(),
             srcOut.resolve(StringUtil.removeLine(page)),
-            resOut
+            resOut,
+            moduleTemplateData.manifestDir
     )
 }
 
 
 fun RecipeExecutor.pageRecipe(
-        moduleTemplateData: ModuleTemplateData,
         page: String,
         enableFragment: Boolean,
         enablePullToRefresh: Boolean,
         enableRecommendWidget: Boolean,
         applicationPackage: String,
         srcOut: File,
-        resOut: File
+        resOut: File,
+        manifestOut: File
 ) {
     //model
     val modelOut = srcOut.resolve("model")
@@ -66,24 +66,38 @@ fun RecipeExecutor.pageRecipe(
     save(RequestParamKt(applicationPackage, page), modelOut.resolve("RequestParam${Constants.kotlinExt}"))
     save(MainDataEntityKt(applicationPackage, page), modelOut.resolve("entity/${StringUtil.lineToHump(page)}DataEntity${Constants.kotlinExt}"))
     //ui
-    val uiOut = srcOut.resolve("ui")
-    save(MainActivityKt(applicationPackage, page), uiOut.resolve("${StringUtil.lineToHump(page)}Activity${Constants.kotlinExt}"))
-    save(MainAdapterKt(applicationPackage, page), uiOut.resolve("${StringUtil.lineToHump(page)}Adapter${Constants.kotlinExt}"))
-    save(activity_page_Xml(applicationPackage, page), resOut.resolve("layout/activity_${page}.xml"))
-    ResourceHelper.copyResourceFile("/layout/view_recommend_header.xml", resOut.resolve("layout/view_recommend_header.xml"))
-    val srcFloorOut = uiOut.resolve("floor")
-    save(EmptyViewModelKt(applicationPackage, page), srcFloorOut.resolve("EmptyViewModel${Constants.kotlinExt}"))
-    save(TextViewModelKt(applicationPackage, "${applicationPackage}.${StringUtil.removeLine(page)}.ui.floor", page, "text", false), srcFloorOut.resolve("TextViewModel.kt"))
-    ResourceHelper.copyResourceFile("/layout/floor_holder_text.xml", resOut.resolve("layout/floor_holder_text.xml"))
-    ResourceHelper.copyResourceFile("/layout/view_state_empty.xml", resOut.resolve("layout/view_state_empty.xml"))
-    //vm
-    val vmOut = srcOut.resolve("vm")
-    save(MainViewModelKt(applicationPackage, page), vmOut.resolve("${StringUtil.lineToHump(page)}ViewModel${Constants.kotlinExt}"))
+    if (enableFragment) {
+        //TODO 待补充
+    } else {
+        val uiOut = srcOut.resolve("ui")
+        save(MainAdapterKt(applicationPackage, page), uiOut.resolve("${StringUtil.lineToHump(page)}Adapter${Constants.kotlinExt}"))
+        if (enablePullToRefresh && enableRecommendWidget) {//支持下拉刷新和推荐组件
+            save(MainActivityKt(applicationPackage, page), uiOut.resolve("${StringUtil.lineToHump(page)}Activity${Constants.kotlinExt}"))
+            save(activity_page_Xml(applicationPackage, page), resOut.resolve("layout/activity_${page}.xml"))
+        } else if (enablePullToRefresh) { //只支持下拉刷新
 
+        } else if (enableRecommendWidget) {//只支持推荐组件
+
+        } else { //都不支持
+
+        }
+        ResourceHelper.copyResourceFile("/layout/view_recommend_header.xml", resOut.resolve("layout/view_recommend_header.xml"))
+        val srcFloorOut = uiOut.resolve("floor")
+        save(EmptyViewModelKt(applicationPackage, page), srcFloorOut.resolve("EmptyViewModel${Constants.kotlinExt}"))
+        save(TextViewModelKt(applicationPackage, "${applicationPackage}.${StringUtil.removeLine(page)}.ui.floor", page, "text", false), srcFloorOut.resolve("TextViewModel.kt"))
+        ResourceHelper.copyResourceFile("/layout/floor_holder_text.xml", resOut.resolve("layout/floor_holder_text.xml"))
+        ResourceHelper.copyResourceFile("/layout/view_state_empty.xml", resOut.resolve("layout/view_state_empty.xml"))
+        //vm
+        val vmOut = srcOut.resolve("vm")
+        save(MainViewModelKt(applicationPackage, page), vmOut.resolve("${StringUtil.lineToHump(page)}ViewModel${Constants.kotlinExt}"))
+
+
+    }
+
+    //目前mergeXml无效，还需要研究。需要手动添加
     //string
     mergeXml(string_page_reportId_Xml(page), resOut.resolve("values/string.xml"))
-
     //activity manifest
-    mergeXml(activity_AndroidManifest_Xml(page), moduleTemplateData.manifestDir.resolve("AndroidManifest.xml"))
+    mergeXml(activity_AndroidManifest_Xml(page), manifestOut.resolve("AndroidManifest.xml"))
 
 }

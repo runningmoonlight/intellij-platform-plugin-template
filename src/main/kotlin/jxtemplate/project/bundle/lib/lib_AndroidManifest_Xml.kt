@@ -29,13 +29,13 @@ fun lib_AndroidManifest_Xml(
 """
     )
 
-//    if (page.isNotEmpty()) {
-//        stringBuilder.append(
-//                """
-//
-//        <activity android:name=".${StringUtil.lineToHump(page).capitalize()}Activity"></activity>
-//""".trimIndent())
-//    }
+    if (page.isNotEmpty()) {
+        stringBuilder.append(
+                """
+
+        <activity android:name=".${StringUtil.lineToHump(page)}Activity"></activity>
+""".trimIndent())
+    }
 
     stringBuilder.append(
 """

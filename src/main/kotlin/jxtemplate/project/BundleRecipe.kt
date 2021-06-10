@@ -120,7 +120,16 @@ fun RecipeExecutor.bundleRecipe(
     save(DemoMainActivityKt(bundleName), libSrcOut.resolve("DemoMainActivity${Constants.javaExt}"))
 
     if (buildMainPage) {
-        //TODO
+        pageRecipe(
+                page,
+                enableFragment,
+                enablePullToRefresh,
+                enableRecommendWidget,
+                "com.jd.pingou.${bundleName}",
+                libSrcOut.resolve(page),
+                libResOut,
+                libOut
+        )
 
     }
 
