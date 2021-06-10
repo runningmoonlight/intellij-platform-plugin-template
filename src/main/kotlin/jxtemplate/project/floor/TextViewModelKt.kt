@@ -20,7 +20,7 @@ fun TextViewModelKt(
     if (buildEntity) {
         floorViewModelTemplate.append(
 """
-package ${packageName}.${floor}
+package ${packageName}.${StringUtil.removeLine(floor)}
 """.trimIndent()
         )
     } else {
@@ -35,7 +35,7 @@ package $packageName
 
 import android.widget.TextView
 import ${applicationPackage}.R
-import ${applicationPackage}.${page}.ui.${StringUtil.lineToHump(page)}Adapter
+import ${applicationPackage}.${StringUtil.removeLine(page)}.ui.${StringUtil.lineToHump(page)}Adapter
 import com.jd.pingou.lib.adapter.core.*
 
 /**

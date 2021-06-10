@@ -1,5 +1,7 @@
 package jxtemplate.project.floor.string
 
+
+import jxtemplate.util.StringUtil
 import java.lang.StringBuilder
 
 /**
@@ -19,7 +21,7 @@ fun StringEntityKt(
     if (buildEntity) {
         floorEntityTemplate.append(
 """
-package ${packageName}.${floor}
+package ${packageName}.${StringUtil.removeLine(floor)}
 """.trimIndent()
         )
     } else {

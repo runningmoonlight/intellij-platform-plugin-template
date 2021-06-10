@@ -11,7 +11,7 @@ fun MainViewModelKt(
         applicationPackage: String?,
         page: String
 ) = """
-package ${applicationPackage}.${page}.vm
+package ${applicationPackage}.${StringUtil.removeLine(page)}.vm
 
 import androidx.lifecycle.MutableLiveData
 import ${applicationPackage}.common.BaseViewModel

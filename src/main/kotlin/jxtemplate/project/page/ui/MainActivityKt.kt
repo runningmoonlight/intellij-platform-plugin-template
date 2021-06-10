@@ -131,7 +131,7 @@ class ${StringUtil.lineToHump(page)}Activity : BaseActivity(), IRecommend {
         initViewModel()
 
         immersive(true)
-        JxReportUtils.athenaReport(m$${StringUtil.lineToHump(page)}ReportId, 0)
+        JxReportUtils.athenaReport(m${StringUtil.lineToHump(page)}ReportId, 0)
     }
 
     private fun initView() {
