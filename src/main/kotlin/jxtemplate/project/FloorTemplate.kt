@@ -20,7 +20,7 @@ val floorTemplate
         screens = listOf(WizardUiContext.ActivityGallery, WizardUiContext.MenuEntry, WizardUiContext.NewProject, WizardUiContext.NewModule)
 
         val floorName = stringParameter {
-            name = "楼层名称"
+            name = "楼层名称(只输入楼层名称小写，多个单词用_分隔，不要带ViewModel)"
             default = ""
             help = "只输入楼层名称小写，多个单词用_分隔，不要带ViewModel"
             constraints = listOf(Constraint.NONEMPTY)

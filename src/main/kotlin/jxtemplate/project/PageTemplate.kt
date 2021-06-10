@@ -20,14 +20,14 @@ val pageTemplate
         screens = listOf(WizardUiContext.ActivityGallery, WizardUiContext.MenuEntry, WizardUiContext.NewProject, WizardUiContext.NewModule)
 
         val page = stringParameter {
-            name = "页面名称"
+            name = "页面名称(输入页面单词小写，多个单词用_隔开)"
             default = ""
             help = "输入页面单词小写，多个单词用_隔开"
             constraints = listOf(Constraint.NONEMPTY)
         }
         val enableFragment = booleanParameter {
             name = "是否使用activity嵌套fragment"
-            default = true
+            default = false
         }
         val enablePullToRefresh = booleanParameter {
             name = "是否支持下拉刷新"
@@ -42,7 +42,7 @@ val pageTemplate
 
         widgets(
                 TextFieldWidget(page),
-                CheckBoxWidget(enableFragment),
+//                CheckBoxWidget(enableFragment),
                 CheckBoxWidget(enablePullToRefresh),
                 CheckBoxWidget(enableRecommendWidget)
         )

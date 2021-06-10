@@ -1,11 +1,9 @@
 package jxtemplate.project.page.ui
 
 /**
- * Created by liuheng on 2021/6/3.
- * activity_main.xml，支持下拉刷新和推荐组件
+ * Created by liuheng on 2021/6/10.
  */
-
-fun activity_page_Xml(
+fun activity_only_recommend_Xml(
         applicationPackage: String?,
         page: String
 ) = """
@@ -64,7 +62,7 @@ fun activity_page_Xml(
                 android:layout_marginEnd="4dp"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <${applicationPackage}.common.PullToRefreshView
+        <${applicationPackage}.common.RecommendParentRecycler
             android:id="@+id/view_pull_to_refresh"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

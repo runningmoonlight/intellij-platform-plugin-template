@@ -1,11 +1,9 @@
 package jxtemplate.project.page.ui
 
 /**
- * Created by liuheng on 2021/6/3.
- * activity_main.xml，支持下拉刷新和推荐组件
+ * Created by liuheng on 2021/6/10.
  */
-
-fun activity_page_Xml(
+fun activity_no_pull_recommend_Xml(
         applicationPackage: String?,
         page: String
 ) = """
@@ -64,25 +62,14 @@ fun activity_page_Xml(
                 android:layout_marginEnd="4dp"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <${applicationPackage}.common.PullToRefreshView
-            android:id="@+id/view_pull_to_refresh"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:cacheColorHint="@null"
             android:fadingEdge="none"
             android:listSelector="@null"/>
     </LinearLayout>
-
-    <com.facebook.drawee.view.SimpleDraweeView
-        android:id="@+id/sdv_to_top"
-        android:layout_width="65dp"
-        android:layout_height="65dp"
-        android:layout_gravity="bottom|end"
-        android:adjustViewBounds="true"
-        android:scaleType="fitCenter"
-        android:src="@drawable/icon_jx_back_top"
-        android:visibility="invisible"
-        android:layout_marginBottom="100dp"/>
 
     <com.jd.pingou.widget.loading.PgCommonNetLoadingStyle2
         android:id="@+id/view_center_loading"

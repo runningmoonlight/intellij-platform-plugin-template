@@ -35,7 +35,6 @@ package $packageName
 
 import android.widget.TextView
 import ${applicationPackage}.R
-import ${applicationPackage}.${StringUtil.removeLine(page)}.ui.${StringUtil.lineToHump(page)}Adapter
 import com.jd.pingou.lib.adapter.core.*
 
 /**
@@ -48,7 +47,6 @@ class ${floorCap}Model(val text: String) : IDataModel
 class ${floorCap}ViewModel: LayoutViewModel<${floorCap}Model>(R.layout.floor_holder_${floor}) {
     //在这里增加成员变量，一般不需要
 
-    //在init中设置viewHolder的闭包方法
     init {
         onCreateViewHolder {
 
@@ -56,9 +54,9 @@ class ${floorCap}ViewModel: LayoutViewModel<${floorCap}Model>(R.layout.floor_hol
 
             onBindViewHolder {
                 val model = getModel<${floorCap}Model>()  //拿到DataModel
-                val data = model?.text  //拿到data
-                val adapter = getAdapter<${StringUtil.lineToHump(page)}Adapter>() //拿到adapter
-                val recyclerView = getRecyclerView()
+                // val data = model?.text  //拿到data
+                // val adapter = getAdapter<BaseAdapter<ViewModelType>>() //拿到adapter，把BaseAdapter类型替换为实际adapter类型
+                // val recyclerView = getRecyclerView()
                 textView.text = model?.text
             }
 

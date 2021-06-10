@@ -3,10 +3,10 @@ package jxtemplate.project.page.ui
 import jxtemplate.util.StringUtil
 
 /**
- * Created by liuheng on 2021/6/3.
- * MainActivity，支持下拉刷新和推荐组件
+ * Created by liuheng on 2021/6/10.
+ * OnlyRecommendActivity，只支持推荐组件
  */
-fun MainActivityKt(
+fun OnlyRecommendActivity(
         applicationPackage: String?,
         page: String
 ) = """
@@ -34,10 +34,7 @@ import com.jd.pingou.base.jxutils.android.JxScreenUtils
 import com.jd.pingou.base.jxutils.common.JxReportUtils
 import com.jd.pingou.crash.ExceptionController
 import ${applicationPackage}.R
-import ${applicationPackage}.common.ErrorViewModel
-import ${applicationPackage}.common.OnRetryListener
-import ${applicationPackage}.common.PostedEvent
-import ${applicationPackage}.common.PullToRefreshView
+import ${applicationPackage}.common.*
 import ${applicationPackage}.${StringUtil.removeLine(page)}.vm.${StringUtil.lineToHump(page)}ViewModel
 import com.jd.pingou.lib.adapter.WrapperAdapter
 import com.jd.pingou.lib.adapter.core.ViewModelType
@@ -61,7 +58,7 @@ class ${StringUtil.lineToHump(page)}Activity : BaseActivity(), IRecommend {
     private lateinit var mBackIv: ImageView
     private lateinit var mTitleTv: TextView
     private lateinit var mMessageView: PgMessageView
-    private lateinit var mPullToRefreshView: PullToRefreshView
+    private lateinit var mParentRecycler: RecommendParentRecycler
     private lateinit var mCenterLoadingView: PgCommonNetLoadingStyle2
     private lateinit var mToTopSdv: SimpleDraweeView
 
@@ -101,7 +98,7 @@ class ${StringUtil.lineToHump(page)}Activity : BaseActivity(), IRecommend {
                 return
             }
             if (newState == RecyclerView.SCROLL_STATE_IDLE) {
-                val firstView = (mPullToRefreshView.refreshableView.layoutManager as LinearLayoutManager).findViewByPosition(0)
+                val firstView = (mParentRecycler.layoutManager as LinearLayoutManager).findViewByPosition(0)
                 if (null != firstView && firstView.top == 0) {
                     mRecyclerViewDy = 0
                     mToTopSdv.visibility = View.INVISIBLE
@@ -144,12 +141,12 @@ class ${StringUtil.lineToHump(page)}Activity : BaseActivity(), IRecommend {
         mMessageView = findViewById(R.id.message_view)
 
         //下拉刷新RecyclerView
-        mPullToRefreshView = findViewById(R.id.view_pull_to_refresh)
-        mWrapperAdapter.into(mPullToRefreshView.refreshableView)
-        mPullToRefreshView.setOnRefreshListener {
+        mParentRecycler = findViewById(R.id.recommend_parent_recycler)
+        mWrapperAdapter.into(mParentRecycler)
+        mParentRecycler.setOnRefreshListener {
             m${StringUtil.lineToHump(page)}ViewModel.sync${StringUtil.lineToHump(page)}Data("", false) //TODO
         }
-        mPullToRefreshView.refreshableView.addOnScrollListener(mRecycleViewScrollListener)
+        mParentRecycler.addOnScrollListener(mRecycleViewScrollListener)
         //推荐组件footer
         mRecommendFooterView = RecommendFooterView(this)
         mRecommendFooterView.setFooterState(RecommendFooterView.FOOTER_NORMAL)
@@ -158,9 +155,9 @@ class ${StringUtil.lineToHump(page)}Activity : BaseActivity(), IRecommend {
             mRecommendWidget.loadRecommendData()
         }
         //推荐组件header
-        mRecommendHeaderView = InflateUtil.inflate(this, R.layout.view_recommend_header, mPullToRefreshView.refreshableView, false)
+        mRecommendHeaderView = InflateUtil.inflate(this, R.layout.view_recommend_header, mParentRecycler, false)
         //推荐组件
-        mRecommendWidget = RecommendWidget(mPullToRefreshView.refreshableView, this,
+        mRecommendWidget = RecommendWidget(mParentRecycler, this,
                 RecommendBuilder()
                         .setRecommendID("5714") //TODO
                         .setFullFooter(false)
@@ -197,7 +194,7 @@ class ${StringUtil.lineToHump(page)}Activity : BaseActivity(), IRecommend {
                 mRecycleViewScrollListener.onScrolled(recyclerView, dx, dy)
             }
         })
-        mPullToRefreshView.setRecommendWidget(mRecommendWidget)
+        mParentRecycler.setRecommendWidget(mRecommendWidget)
 
         //loading view
         mCenterLoadingView = findViewById(R.id.view_center_loading)
@@ -211,7 +208,6 @@ class ${StringUtil.lineToHump(page)}Activity : BaseActivity(), IRecommend {
     private fun initViewModel() {
         m${StringUtil.lineToHump(page)}ViewModel = ViewModelProviders.of(this).get(${StringUtil.lineToHump(page)}ViewModel::class.java)
         m${StringUtil.lineToHump(page)}ViewModel.dataMutableLiveData.observe(this, Observer {
-            mPullToRefreshView.onRefreshComplete()
             m${StringUtil.lineToHump(page)}Adapter.setData(it)
             loadRecommend()
         })
@@ -219,7 +215,6 @@ class ${StringUtil.lineToHump(page)}Activity : BaseActivity(), IRecommend {
             onEvent(it)
         })
         m${StringUtil.lineToHump(page)}ViewModel.stateEventLiveData.observe(this, Observer {
-            mPullToRefreshView.onRefreshComplete()
             onEvent(it)
         })
 
@@ -241,7 +236,7 @@ class ${StringUtil.lineToHump(page)}Activity : BaseActivity(), IRecommend {
 
     private fun scrollToTop() {
         mRecommendWidget.scrollToTop()
-        mPullToRefreshView.refreshableView.smoothScrollToPosition(0)
+        mParentRecycler.smoothScrollToPosition(0)
     }
 
     private fun loadRecommend() {

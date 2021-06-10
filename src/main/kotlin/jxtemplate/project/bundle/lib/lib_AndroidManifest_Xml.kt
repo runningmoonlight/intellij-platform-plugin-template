@@ -33,7 +33,7 @@ fun lib_AndroidManifest_Xml(
         stringBuilder.append(
                 """
 
-        <activity android:name=".${StringUtil.lineToHump(page)}Activity"></activity>
+        <activity android:name="${StringUtil.removeLine(page)}.ui.${StringUtil.lineToHump(page)}Activity"></activity>
 """.trimIndent())
     }
 

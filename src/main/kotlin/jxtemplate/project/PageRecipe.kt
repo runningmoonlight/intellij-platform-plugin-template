@@ -75,11 +75,14 @@ fun RecipeExecutor.pageRecipe(
             save(MainActivityKt(applicationPackage, page), uiOut.resolve("${StringUtil.lineToHump(page)}Activity${Constants.kotlinExt}"))
             save(activity_page_Xml(applicationPackage, page), resOut.resolve("layout/activity_${page}.xml"))
         } else if (enablePullToRefresh) { //只支持下拉刷新
-
+            save(OnlyPullActivityKt(applicationPackage, page), uiOut.resolve("${StringUtil.lineToHump(page)}Activity${Constants.kotlinExt}"))
+            save(activity_only_pull_Xml(applicationPackage, page), resOut.resolve("layout/activity_${page}.xml"))
         } else if (enableRecommendWidget) {//只支持推荐组件
-
+            save(OnlyRecommendActivity(applicationPackage, page), uiOut.resolve("${StringUtil.lineToHump(page)}Activity${Constants.kotlinExt}"))
+            save(activity_only_recommend_Xml(applicationPackage, page), resOut.resolve("layout/activity_${page}.xml"))
         } else { //都不支持
-
+            save(NoPullRecommendActivityKt(applicationPackage, page), uiOut.resolve("${StringUtil.lineToHump(page)}Activity${Constants.kotlinExt}"))
+            save(activity_no_pull_recommend_Xml(applicationPackage, page), resOut.resolve("layout/activity_${page}.xml"))
         }
         ResourceHelper.copyResourceFile("/layout/view_recommend_header.xml", resOut.resolve("layout/view_recommend_header.xml"))
         val srcFloorOut = uiOut.resolve("floor")
@@ -90,8 +93,6 @@ fun RecipeExecutor.pageRecipe(
         //vm
         val vmOut = srcOut.resolve("vm")
         save(MainViewModelKt(applicationPackage, page), vmOut.resolve("${StringUtil.lineToHump(page)}ViewModel${Constants.kotlinExt}"))
-
-
     }
 
     //目前mergeXml无效，还需要研究。需要手动添加
