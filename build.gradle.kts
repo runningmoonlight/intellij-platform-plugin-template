@@ -41,6 +41,7 @@ intellij {
     downloadSources = properties("platformDownloadSources").toBoolean()
     updateSinceUntilBuild = true
 
+    intellij.localPath = properties("StudioRunPath")
     // Plugin Dependencies. Uses `platformPlugins` property from the gradle.properties file.
     setPlugins(*properties("platformPlugins").split(',').map(String::trim).filter(String::isNotEmpty).toTypedArray())
 }

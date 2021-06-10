@@ -1,6 +1,6 @@
 <idea-plugin>
-    <id>com.pingou.plugins.template</id>
-    <name>Pingou Bundle Template</name>
+    <id>com.heng.plugins.template</id>
+    <name>Jx Template Plugin</name>
     <vendor email="liuheng58@jd.com">heng</vendor>
 
     <!-- Product and plugin compatibility requirements -->

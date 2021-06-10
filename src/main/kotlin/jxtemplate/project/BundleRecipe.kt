@@ -53,6 +53,8 @@ fun RecipeExecutor.bundleRecipe(
     save(bundle_gitignore(), bundleOut.resolve(".gitignore"))
     save(gradle_propertiesKt(pingouLibVersion), bundleOut.resolve("gradle.properties"))
     save(setting_gradleKt(bundleName), bundleOut.resolve("settings.gradle"))
+    ResourceHelper.copyResourceFile("/gradlewrapper/gradlew", bundleOut.resolve("gradlew"))
+    ResourceHelper.copyResourceFile("/gradlewrapper/gradlew.bat", bundleOut.resolve("gradlew.bat"))
 
     //application
     val applicationOut = bundleOut.resolve("application")
