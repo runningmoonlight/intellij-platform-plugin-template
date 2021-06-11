@@ -29,6 +29,8 @@ object ResourceHelper {
         val outputStream = toFile.outputStream()
         inputStream.copyTo(outputStream)
         outputStream.flush()
+        inputStream.close()
+        outputStream.close()
     }
 
 }
